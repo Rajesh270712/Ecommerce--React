@@ -2,10 +2,11 @@ import React from "react";
 
 
 
-const ProductList = ({productData,handleDelete}) =>{
-    
+const ProductList = ({productData,handleDelete,showSortHTL,showSortLTH}) =>{
+    // console.log(showSortHTL,showSortLTH);
     return (
         <div>
+           
         <table>
             <thead>
                 <tr>
@@ -19,7 +20,10 @@ const ProductList = ({productData,handleDelete}) =>{
             </thead>
             <tbody>
             {
-                productData.map((product)=>(
+                productData
+                .sort((a,b)=> showSortLTH ? a.price-b.price : false  )
+                .sort((a,b)=> showSortHTL ? b.price-a.price : false  )
+                .map((product)=>(
                     <tr key={product.id} >
                         <td><img src={product.image} alt="" /></td>
                         <td>{product.title}</td>

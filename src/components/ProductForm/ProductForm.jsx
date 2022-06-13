@@ -16,10 +16,14 @@ const ProductForm = () => {
   const [productData, setProductData] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [totalProducts, setTotalProducts] = React.useState(0);
+  const [showSortHTL,setShowSortHTL] =React.useState(false)
+  const [showSortLTH,setShowSortLTH] =React.useState(false)
+
+
 
   React.useEffect(() => {
     getData();
-  }, [page]);
+  }, [page,showSortLTH,showSortHTL]);
 
   if (loading) {
     return <h3>...Loading</h3>;
@@ -128,7 +132,12 @@ const ProductForm = () => {
           <input type="Submit" onClick={handleFormSubmit} />
         </form>
       </div>
-      <ProductList  productData={productData} handleDelete={handleDelete} />
+      <label>
+                Sort
+                <button onClick={()=>{setShowSortLTH(!showSortLTH)}} >Low To High </button>
+                <button onClick={()=>{setShowSortHTL(!showSortHTL)}} >High To Low </button>
+            </label>
+      <ProductList  productData={productData} handleDelete={handleDelete} showSortHTL={showSortHTL} showSortLTH={showSortLTH} />
       <button
         disabled={page === 1}
         onClick={() => {
