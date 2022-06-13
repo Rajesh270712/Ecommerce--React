@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-const ProductList = ({productData,handleDelete,showSortHTL,showSortLTH}) =>{
+const ProductList = ({productData,handleDelete,showSortHTL,showSortLTH ,filterByGender}) =>{
     // console.log(showSortHTL,showSortLTH);
     return (
         <div>
@@ -23,9 +23,10 @@ const ProductList = ({productData,handleDelete,showSortHTL,showSortLTH}) =>{
                 productData
                 .sort((a,b)=> showSortLTH ? a.price-b.price : false  )
                 .sort((a,b)=> showSortHTL ? b.price-a.price : false  )
+                .filter((product)=> filterByGender==="male" ? product.gender==="male" : filterByGender==="female" ? product.gender==="female" : true )
                 .map((product)=>(
                     <tr key={product.id} >
-                        <td><img src={product.image} alt="" /></td>
+                        <td><img  src={product.image} alt="" /></td>
                         <td>{product.title}</td>
                         <td>{product.gender}</td>
                         <td>₹ {product.price}</td>
